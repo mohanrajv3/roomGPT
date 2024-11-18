@@ -1,10 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
+import React, { useState } from "react";
+
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import SquigglyLines from "../components/SquigglyLines";
 
 export default function HomePage() {
+  const [initialIdeas, setInitialIdeas] = useState(""); // State to store user input
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInitialIdeas(event.target.value); // Update state on input change
+  };
+
   return (
     <div className="flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Header />
@@ -12,7 +20,7 @@ export default function HomePage() {
         <a
           href="https://vercel.fyi/roomGPT"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="border border-gray-700 rounded-lg py-2 px-4 text-gray-400 text-sm mb-5 transition duration-300 ease-in-out"
         >
           Clone and deploy your own with{" "}
@@ -26,10 +34,26 @@ export default function HomePage() {
           </span>{" "}
           for everyone.
         </h1>
-        <h2 className="mx-auto mt-12 max-w-xl text-lg sm:text-gray-400  text-gray-500 leading-7">
+        <h2 className="mx-auto mt-12 max-w-xl text-lg sm:text-gray-400 text-gray-500 leading-7">
           Take a picture of your room and see how your room looks in different
           themes. 100% free – remodel your room today.
         </h2>
+        
+        {/* New input field for user ideas */}
+        <div className="mt-8">
+          <label htmlFor="initial-ideas" className="block text-gray-300 mb-2">
+            ANY INITIAL IDEAS:
+          </label>
+          <input
+            id="initial-ideas"
+            type="text"
+            value={initialIdeas}
+            onChange={handleInputChange}
+            placeholder="Enter your ideas here..."
+            className="border border-gray-700 rounded-lg py-2 px-4 text-gray-400"
+          />
+        </div>
+        
         <Link
           className="bg-blue-600 rounded-xl text-white font-medium px-4 py-3 sm:mt-10 mt-8 hover:bg-blue-500 transition"
           href="/dream"
